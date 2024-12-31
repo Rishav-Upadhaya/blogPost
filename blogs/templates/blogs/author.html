@@ -1,0 +1,16 @@
+{% extends "blogs/layout.html" %} {% block body %}
+<h1>Blogs by {{ writer }}</h1>
+{% for i in posts %}
+<li><a href="{% url 'post' i %}">{{ i }}</a></li>
+{% empty %}
+<a
+  href="{% url 'create' %}"
+  style="font-size: 20px; text-transform: capitalize; text-decoration: None"
+  >Create Blog</a
+>
+<br>
+<br>
+<li>No Blogs yet </li>
+{% endfor %}
+<h3><a href ={% url 'bloghome'%}>Back to Home</a></h3>
+{% endblock %}

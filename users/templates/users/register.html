@@ -1,0 +1,9 @@
+{% extends "users/layout.html"%} {% block body %} {% if message %}
+<p>{{ message }}</p>
+{% endif %}
+<form action="" method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Register" />
+</form>
+
+{% endblock %}
