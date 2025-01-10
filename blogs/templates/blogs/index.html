@@ -23,12 +23,29 @@
 <a href="{% url 'login' %}" style="font-size: 20px; text-decoration: None"
   >Signin</a
 >
-
 {% endif %}
-
-<ul>
+<br />
+<br />
+<div class="body" style="display: flex; gap: 20px; flex-wrap: wrap">
   {% for T in head %}
-  <li><a href="{% url 'post' T %}">{{ T }} </a></li>
+  <div class="post">
+    {% if T.blog_image %}
+    <a href="{% url 'post' T.head %}"
+      ><img
+        src="{{ T.blog_image.url }}"
+        alt="{{ T.blog_image.url }}"
+        style="width: 300px; height: 220px; object-fit: cover"
+    /></a>
+    <br />
+    {% endif %}
+
+    <a
+      href="{% url 'post' T.head %}"
+      style="width: 300px; display: flex; flex-wrap: wrap"
+      >{{ T.head }}
+    </a>
+    <br />
+  </div>
   {% endfor %}
-</ul>
+</div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "blogs/layout.html"%} {% block body %} {% if message %}
 <p>{{ message }}</p>
 {% endif %}
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <input
     type="text"
@@ -19,6 +19,13 @@
     style="white-space: pre-wrap"
   ></textarea>
   <br />
+  <label>Upload Image for the post:</label>
+  <input
+    type="file"
+    name="postimage"
+    placeholder="Upload Image for the post"
+    label="Image"
+  /><br />
   <br />
   <input type="submit" value="Create" />
 </form>

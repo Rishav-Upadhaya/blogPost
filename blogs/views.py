@@ -11,7 +11,8 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def bloghome(request):
     return render(request, "blogs/index.html", {
-        "head": [blog.head for blog in Blog.objects.all()]
+        # "head": [blog.head for blog in Blog.objects.all()], 
+        "head":  Blog.objects.all(),
     })
 
 def post(request, t):
@@ -42,12 +43,14 @@ def createpost(request):
         if request.method == "POST":
             title = request.POST["title"]
             description1 = request.POST["description"]
+            postimage1 = request.FILES["postimage"]
             if title and description1:
                 # Save the blog post
                 Blog.objects.create(
                     head=title,
                     description=description1,
-                    author=request.user  # Make sure the user is logged in
+                    author=request.user,  # Make sure the user is logged in
+                    blog_image = postimage1,
                 )
                 return HttpResponseRedirect(reverse('bloghome'))
             else:

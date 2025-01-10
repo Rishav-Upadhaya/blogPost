@@ -1,16 +1,36 @@
 {% extends "blogs/layout.html" %} {% block body %}
 <h1>Blogs by {{ writer }}</h1>
-{% for i in posts %}
-<li><a href="{% url 'post' i %}">{{ i }}</a></li>
-{% empty %}
-<a
-  href="{% url 'create' %}"
-  style="font-size: 20px; text-transform: capitalize; text-decoration: None"
-  >Create Blog</a
->
+<div class="body" style="display: flex; gap: 20px; flex-wrap: wrap">
+  {% for T in briefs %}
+  <div class="post">
+    {% if T.blog_image %}
+    <a href="{% url 'post' T.head %}"
+      ><img
+        src="{{ T.blog_image.url }}"
+        alt="{{ T.blog_image.url }}"
+        style="width: 300px; height: 220px; object-fit: cover"
+    /></a>
+    <br />
+    {% endif %}
+
+    <a
+      href="{% url 'post' T.head %}"
+      style="width: 300px; display: flex; flex-wrap: wrap"
+      >{{ T.head }}
+    </a>
+    <br />
+  </div>
+  {% empty %}
+  <a
+    href="{% url 'create' %}"
+    style="font-size: 20px; text-transform: capitalize; text-decoration: None"
+    >Create Blog</a
+  >
+  <br>
+  <br>
+  <li>No Blogs yet </li>
+  {% endfor %}
+</div>
 <br>
-<br>
-<li>No Blogs yet </li>
-{% endfor %}
 <h3><a href ={% url 'bloghome'%}>Back to Home</a></h3>
 {% endblock %}

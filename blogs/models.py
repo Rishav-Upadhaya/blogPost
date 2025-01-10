@@ -9,6 +9,7 @@ class Blog(models.Model):
     # author = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete= models.CASCADE, related_name="blogs")
     published_at = models.DateTimeField(auto_now_add=True)
+    blog_image = models.ImageField(null=True, blank= True, upload_to="images/")
 
     def __str__(self):
-        return f"{self.author} created the blog name {self.head} which is described as {self.description} at {self.published_at}"
+        return f"{self.author} created the blog name {self.head}"

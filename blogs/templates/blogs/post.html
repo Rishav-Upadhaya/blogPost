@@ -1,6 +1,9 @@
 {% extends "blogs/layout.html"%} {% block body %}
 
 <h1>{{ brief.head }}</h1>
+{% if brief.blog_image %}
+<a href = "{{ brief.blog_image.url }}" target = "_blank" ><img src = "{{ brief.blog_image.url }}" alt = "{{ brief.blog_image.url }}" style = "width:100%; height:200px; object-fit:cover;" ></a>
+{% endif %}
 <b><p style="font-size:24px">Description</p></b>
 <p style="font-size:20px">{{ brief.description }}</p>
 <h3>Author:- <a href ={% url 'author' brief.author%} style="text-decoration:None">  {{ brief.author }}</a></h3>
