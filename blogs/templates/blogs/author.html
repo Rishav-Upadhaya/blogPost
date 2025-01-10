@@ -1,5 +1,10 @@
-{% extends "blogs/layout.html" %} {% block body %}
+{% extends "blogs/layout.html" %}
+ {% block body %}
 <h1>Blogs by {{ writer }}</h1>
+{% if request.user.username == writer %}
+  <p style = "font-size:20px"><b style = "font-size:20px">Username:</b> {{request.user.username}}</p>
+  <p style = "font-size:20px"><b style = "font-size:20px">Email:</b> {{request.user.email}}</p>
+{% endif %}
 <div class="body" style="display: flex; gap: 20px; flex-wrap: wrap">
   {% for T in briefs %}
   <div class="post">

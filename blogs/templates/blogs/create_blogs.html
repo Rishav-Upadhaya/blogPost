@@ -3,6 +3,7 @@
 {% endif %}
 <form action="" method="post" enctype="multipart/form-data">
   {% csrf_token %}
+  <label>Title:</label>
   <input
     type="text"
     name="title"
@@ -10,6 +11,7 @@
     label="Title"
   /><br />
   <br />
+  <label>Description:</label> <br />
   <textarea
     name="description"
     placeholder="Description"
@@ -19,7 +21,7 @@
     style="white-space: pre-wrap"
   ></textarea>
   <br />
-  <label>Upload Image for the post:</label>
+  <label>Upload Image:</label>
   <input
     type="file"
     name="postimage"
