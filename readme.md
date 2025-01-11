@@ -8,6 +8,7 @@ BlogPost is a project based on Backend Development created using Django. It lets
 2. **Create Blog Posts**
 3. **Read Blogs**
 4. **Delete Blogs**
+5. **Comment on Blogs**
 
 ## Installation
 
@@ -60,11 +61,12 @@ http://127.0.0.1:8000/
 3. View a list of all blog posts on the home page.
 4. Click on a blog to view its details.
 5. Delete your own blog if needed.
+6. Comment on other Blogs.
 
 ## Future Developments
 
 1. Using DRF and creating API's that could get other user blogs as well.
-2. Add a commenting feature for blogs.
+2. Add a commenting feature for blogs. (Status:- Added)
 3. Allow users to edit their existing blogs.
 4. Implement advanced search functionality.
 5. Add tags or categories for blogs.
