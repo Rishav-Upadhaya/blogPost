@@ -1,5 +1,5 @@
 from django.shortcuts import render,get_object_or_404
-from .models import Blog, User
+from .models import Blog, User, Useractivity
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
 from users.models import userForm
@@ -17,8 +17,15 @@ def bloghome(request):
 
 def post(request, t):
     brief = Blog.objects.get(head = t)
+    count = Useractivity.objects.filter(postid = brief)
+    count_Likes = [count.usernameid for count in Useractivity.objects.all() if count.usernameid is not None]
+    count_cmt = [count.commentdes for count in Useractivity.objects.all() if count.commentdes is not None]
     return render(request, "blogs/post.html",{
-        "brief": brief
+        "brief": brief,
+        "Likescounter":count_Likes,
+        "CommentDes" : count_cmt,
+        "counts" : count,
+        "cmts" : len(count)
     })
 
 def author(request, writer):
@@ -73,3 +80,15 @@ def delete_user(request):
             return HttpResponseForbidden("You are not authorized to delete this post.")
     
 
+def comment(request):
+    if request.method =="POST":
+        username1 = request.user
+        commentdes1 = request.POST["comment"]
+        post_id = request.POST.get("brief_id")  # Match the form field name
+        post = get_object_or_404(Blog, pk=post_id)
+        Useractivity.objects.create(
+            usernameid = username1,
+            postid = post ,
+            commentdes = commentdes1 
+        )
+    return HttpResponseRedirect(reverse('post' , kwargs={'t': post.head})) 

@@ -18,5 +18,30 @@
 </form> <br>
 {% endif %}
 <h3><a href ={% url 'bloghome'%}>Back to Home</a></h3>
+{% if request.user.is_authenticated %}
+{% comment %} <button>Like</button> <p>({{Likescounter|length}})</p> {% endcomment %}
+<form action="{% url 'comment' %}" method = "POST">
+    {% csrf_token %}
+    <input type="hidden" name="brief_id" value="{{ brief.id }}">
+<p> Comment</p>
+<textarea name="comment" id="comment" style="width:99%;height:70px;"></textarea>
+<input type = "submit" value = "Comment">
+</form>
+{% endif %}
 
+<p> Comments ({{ cmts }})</p>
+{% for count in counts %}
+    {% if count.postid.head ==  brief.head%}
+        {% if count.usernameid is None %}
+        <p>Anonymous User ( {{count.commented_at}})</p>
+        {% else %}
+        <p>{{count.usernameid}} ( {{ count.commented_at}})</p>
+        {% endif %}
+        <p>{{count.commentdes}}</p>
+    {% endif %}
+    
+{% empty %}
+
+<p>No Comments Yet.</p>
+{% endfor %}
 {% endblock %}
