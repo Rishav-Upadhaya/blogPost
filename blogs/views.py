@@ -28,6 +28,7 @@ def post(request, t):
         "cmts" : len(count)
     })
 
+@login_required
 def author(request, writer):
     try:
         user = User.objects.get(username=writer)
